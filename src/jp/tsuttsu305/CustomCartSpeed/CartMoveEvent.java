@@ -7,6 +7,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 
@@ -15,7 +16,7 @@ public class CartMoveEvent implements Listener {
 	public CartMoveEvent(CustomCartSpeed customCartSpeed) {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-
+@EventHandler
 	public void onCartMove(VehicleMoveEvent event){
 		//defaultの速度を指定
 		double setSpeed = 0.4D;
