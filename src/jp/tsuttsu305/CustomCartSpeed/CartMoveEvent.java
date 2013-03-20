@@ -16,18 +16,18 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 public class CartMoveEvent implements Listener {
 
 	private CustomCartSpeed ccp = null;
-
+	
 	public CartMoveEvent(CustomCartSpeed ccp) {
 		this.ccp = ccp;
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 @EventHandler
 	public void onCartMove(VehicleMoveEvent event){
 		//defaultの速度を指定
 		double setSpeed = 0.4D;
-		//Entity cart = event.getVehicle().getVehicle();
-		//EntityがMineCartか判定。
+		
+
+		//乗っているのがPlayerかどうか
 		if (event.getVehicle().getPassenger() instanceof Player){
 			//移動先の座標取得
 			Location toLoc = event.getTo();
@@ -46,6 +46,7 @@ public class CartMoveEvent implements Listener {
 						toBlock.getRelative(BlockFace.WEST),
 						toBlock.getRelative(BlockFace.NORTH_WEST),
 						};
+				
 				//複数あった場合の判定用
 				boolean signFound = false;
 				//8方位に看板があるか判定
@@ -53,10 +54,10 @@ public class CartMoveEvent implements Listener {
 					if(searchBlock[i].getType() == Material.WALL_SIGN || searchBlock[i].getType() == Material.SIGN_POST){
 						/*看板は以下の書式
 						 * *****************
-						 * 		[Cart Speed]		*　←小文字でもOKにする。
-						 * 		0.4			*
-						 * 			null				*
-						 * 			null				*
+						 *   [Cart Speed]  *　←小文字でもOKにする。
+						 *       0.4       *
+						 *       null      *
+						 *       null      *
 						 *******************
 						 */
 						//看板の内容取得
@@ -75,6 +76,8 @@ public class CartMoveEvent implements Listener {
 									signFound = true;
 							}
 						}
+						
+						//コンフィグの最大値より小さい場合は看板の値。　大きい時はリミットの最大値を設定する
 						if (setSpeed <= ccp.confmax){
 						((Minecart) event.getVehicle()).setMaxSpeed(setSpeed);
 						}else{
