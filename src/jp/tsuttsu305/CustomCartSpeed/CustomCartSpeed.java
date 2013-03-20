@@ -15,6 +15,7 @@ public class CustomCartSpeed extends JavaPlugin {
 		this.logger.info(pdfFile.getName() + " Version " + pdfFile.getVersion() + " is Enabled");
 		//Event登録
 		getServer().getPluginManager().registerEvents(new CartMoveEvent(this), this);
+		
 
 		getConfig().options().copyDefaults(true);
 		saveConfig();
